@@ -26,7 +26,7 @@ server.get('/accounts', (req, res) => {
 // check account by id
 server.get('/accounts/:id', (req, res) => {
   const { id } = req.params;
-  User.findById(id, (err, accounts) => {
+  Account.findById(id, (err, accounts) => {
     if (err) {
       res.status(STATUS_SERVER_ERROR).json({
         error: '!!E: unable to find account with matching ID'
@@ -52,13 +52,13 @@ server.post('/accounts', (req, res) => {
 });
 // delete user
 server.delete('/accounts/:id', (req, res) => {
-  User.findByIdAndRemove(req.params.id, (err, accounts) => {
+  Account.findByIdAndRemove(req.params.id, (err, accounts) => {
     if (err) {
       res.status(STATUS_SERVER_ERROR).json({
         error: '!!E: unable to find account with ID'
       });
     } else {
-      res.status(STATUS_GOOD).json(`account with id ${id} removed`);
+      res.status(STATUS_GOOD).json(`account with id ${req.params.id} removed`);
     }
   });
 });
