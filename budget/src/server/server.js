@@ -50,6 +50,18 @@ server.post('/accounts', (req, res) => {
     }
   });
 });
+// delete user
+server.delete('/accounts/:id', (req, res) => {
+  User.findByIdAndRemove(req.params.id, (err, accounts) => {
+    if (err) {
+      res.status(STATUS_SERVER_ERROR).json({
+        error: '!!E: unable to find account with ID'
+      });
+    } else {
+      res.status(STATUS_GOOD).json(`account with id ${id} removed`);
+    }
+  });
+});
 // plumbing
 mongoose.Promise = global.Promise;
 const connect = mongoose.connect('mongodb://localhost/budget', {
